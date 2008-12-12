@@ -2,7 +2,9 @@
   "betaManifestVersion": 1,
   "version": "1.7RC",
   "entries": [
-    { "url": "/javascript/gears_init.js" },
+    { "url": "/javascripts/cache/bundle.js" },
+    { "url": "/stylesheets/cache/bundle.css" },
+    { "url": "/javascripts/gears_init.js" },
     { "url": "/favicon.ico" },
     { "url": "/apple-touch-icon.png" },
     { "url": "/robots.txt" },
