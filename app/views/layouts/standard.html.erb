@@ -19,19 +19,25 @@
   
   <link rel="shortcut icon" href="<%= url_for(:controller => 'favicon.ico') %>" />
   <%= auto_discovery_link_tag(:rss, {:controller => "todos", :action => "index", :format => 'rss', :token => "#{current_user.token}"}, {:title => "RSS feed of next actions"}) %>
-<link rel="search" type="application/opensearchdescription+xml"
+  <link rel="search" type="application/opensearchdescription+xml"
       title="Tracks"
       href="<%= search_plugin_path %>" />
+  
+  <%= javascript_include_tag "gears_init" %>
+  <script type="text/javascript">
+    window.onload=function(){
+      Nifty("div#todo_new_action_container","normal");
+      if ($('flash').visible()) { new Effect.Fade("flash",{duration:5.0}); }
+    }
 
-<script type="text/javascript">
-window.onload=function(){
-  Nifty("div#todo_new_action_container","normal");
-  if ($('flash').visible()) { new Effect.Fade("flash",{duration:5.0}); }
-}
-</script>
-
-<title><%= @page_title %></title>
-
+    var localServer = google.gears.factory.create('beta.localserver');
+    var store = localServer.createManagedStore('tracks');
+    store.manifestUrl = '/manifest.json';
+    store.checkForUpdate();
+  </script>
+  
+  <title><%= @page_title %></title>
+  
 </head>
 <body class="<%= @controller.controller_name %>">
 <div id="topbar">
