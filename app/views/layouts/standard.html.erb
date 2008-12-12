@@ -12,7 +12,7 @@
                                     accesskey-hints todo-items niftycube
                                     protoload flashobject lowpro
                                   ] %>
-    <%= stylesheet_link_tag *%w[ standard calendar-system niftyCorners] %>
+    <%= stylesheet_link_tag *%w[ standard calendar-system niftyCorners ] %>
   <% end %>
   <%= javascript_include_tag :unobtrusive %>
   <%= stylesheet_link_tag "print", :media => "print" %>
@@ -22,19 +22,6 @@
   <link rel="search" type="application/opensearchdescription+xml"
       title="Tracks"
       href="<%= search_plugin_path %>" />
-  
-  <%= javascript_include_tag "gears_init" %>
-  <script type="text/javascript">
-    window.onload=function(){
-      Nifty("div#todo_new_action_container","normal");
-      if ($('flash').visible()) { new Effect.Fade("flash",{duration:5.0}); }
-    }
-
-    var localServer = google.gears.factory.create('beta.localserver');
-    var store = localServer.createManagedStore('tracks');
-    store.manifestUrl = '/manifest.json';
-    store.checkForUpdate();
-  </script>
   
   <title><%= @page_title %></title>
   
@@ -76,6 +63,7 @@
   <li><%= navigation_link(image_tag("menustar.gif", :size => "16X16", :border => 0), tag_path("starred"), :title => "See your starred actions" ) %></li>
   <li><%= navigation_link(image_tag("stats.gif", :size => "16X16", :border => 0), {:controller => "stats", :action => "index"}, :title => "See your statistics" ) %></li>
   <li><%= navigation_link(image_tag("system-search.png", :size => "16X16", :border => 0), {:controller => "search", :action => "index"}, :title => "Search All Items" ) %></li> 
+  <li><%= image_tag("database_gear.png", :size => "16x16", :border => 0) %><!-- TODO --></li>
 </ul>
 </div>
 
@@ -95,5 +83,15 @@
 </div>
 
 <%= render :partial => "shared/footer" %>
+
+<%= javascript_include_tag "gears_init" %>
+<%= javascript_include_tag "gears" %>
+<script type="text/javascript">
+  window.onload=function(){
+    Nifty("div#todo_new_action_container","normal");
+    if ($('flash').visible()) { new Effect.Fade("flash",{duration:5.0}); }
+  }
+  var gears = Gears;
+</script>
 </body>
 </html>
